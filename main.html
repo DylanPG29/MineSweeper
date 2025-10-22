@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="header-container">
+        <h1><b>Play Minesweeper!</b></h1>
+        <img src="Mr._Smiley_Face.webp" />
+    </header>
+
+    <div class="body-container">
+        <aside class="score-container">
+            <h3>Scoreboard</h3>
+
+        </aside>
+        <div id="game-container">
+
+        </div>
+        <p id="status">Players X's turn</p>
+        <button id="reset">Reset Game</button>
+        <!--<article class="rules-container">
+            <h2>Rules</h2>
+            <h3>Objective</h3>
+            <p>
+                The objective in Minesweeper is to find and mark all the mines hidden under the grey squares, in the shortest time possible. This is done by clicking on the squares to open them. Each square will have one of the following:
+            </p>
+            <ul>
+                <li><p>A mine, and if you click on it you'll lose the game.</p></li>
+                <li><p>A number, which tells you how many of its adjacent squares have mines in them.</p></li>
+                <li><p>Nothing. In this case you know that none of the adjacent squares have mines, and they will be automatically opened as well.</p>
+            </ul>
+            <h3>Winning</h3>
+            <p>You've won the game when you've opened all squares that don't contain a mine. If you've opened all the empty squares but haven't flagged the mine squares remaining, they will be auto-flagged and you have won. Flagging is not required, it's only there to help you keep track of where you think the mines are. The real way to win is open all the non-mine squares.</p>
+
+        </article>-->
+    </div>
+
+    <div class="footer-container">
+        <footer>
+            <p>&copy;2025 MineSweeper. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

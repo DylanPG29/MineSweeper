@@ -1,0 +1,82 @@
+body {
+    font-family: sans-serif;
+    margin: 0px;
+    border: 20px solid black;
+    padding: 25px;
+    background-color:lightslategrey;
+}
+.header-container {
+    background-color:forestgreen;
+    padding: 20px;
+    text-align:center;
+    border: 5px solid black;
+}
+
+.header-container img {
+    width: 10%;
+    height: auto;
+}
+
+.body-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-items: start;
+    align-content: start;
+    justify-content: space-between;
+    column-gap: 25px;
+    row-gap: 25px;
+    padding-right: 25px;
+}
+.score-container {
+    background-color: aliceblue;
+    border: 5px solid black;
+    padding: 20px;
+    margin: 15px;
+}
+
+.rules-container {
+    background-color: aliceblue;
+    border: 5px solid black;
+    padding: 20px;
+    margin: 15px;
+}
+
+#game-container {
+    display: grid;
+    grid-template-columns: repeat(9, 30px);
+    justify-content: center;
+}
+.footer-container {
+    text-align: center;
+    background-color: forestgreen;
+    padding: 10px;
+    margin-top: 30px;
+    border: 5px solid black;
+}
+
+.cell {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.bombcell {
+    background-image: url('C/VFS/Term1/IntrotoHTMLandJavaScript/MinesweeperBoxModel/Bomb.png');
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+}
