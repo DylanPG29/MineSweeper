@@ -67,16 +67,54 @@ body {
     cursor: pointer;
 }
 
-.bombcell {
-    background-image: url('C/VFS/Term1/IntrotoHTMLandJavaScript/MinesweeperBoxModel/Bomb.png');
-    background-size: cover;
-    width: 25px;
-    height: 25px;
-    background: #fff;
-    border: 2px solid #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
+cell.revealed {
+    background-color: #ddd;
+    cursor: default;
+}
+
+.bomb-icon,
+.flag-icon {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.num-1 {
+    color: blue;
+}
+
+.num-2 {
+    color: green;
+}
+
+.num-3 {
+    color: red;
+}
+
+.num-4 {
+    color: navy;
+}
+
+.num-5 {
+    color: maroon;
+}
+
+.num-6 {
+    color: teal;
+}
+
+.num-7 {
+    color: black;
+}
+
+.num-8 {
+    color: gray;
+}
+
+button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    font-size: 16px;
     cursor: pointer;
 }

@@ -1,22 +1,27 @@
 class UserInput {
-    constructor(gameLogic) {
+    constructor(gameBoard, gameLogic) {
+        this.gameBoard = gameBoard;
         this.gameLogic = gameLogic;
-
-        this.boundHandler = this.handleClick.bind(this);
-
-        this.addEventListerners();
     }
 
-    addEventListerners() {
+    attachEvents() {
         const container = document.getElementById('game-container');
-        container?.addEventListener('click', this.boundHandler);
-    }
+        container.addEventListener('click', (e) => {
+            const cell = e.target.closest('.cell');
+            if (!cell) return;
+            const row = +cell.dataset.row;
+            const col = +cell.dataset.col;
+            this.gameLogic.revealCell(row, col);
+        });
 
-    handleClick(event) {
-        const cell = event.target.closest('.cell');
-        if (!cell) return;
-        const index = parseInt(cell.dataset.index, 10);
-        this.gameLogic.makeMove(index);
+        container.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            const cell = e.target.closest('.cell');
+            if (!cell) return;
+            const row = +cell.dataset.row;
+            const col = +cell.dataset.col;
+            this.gameLogic.toggleFlag(row, col);
+        });
     }
 }
 

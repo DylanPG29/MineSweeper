@@ -1,59 +1,135 @@
 class GameLogic {
     constructor(gameBoard) {
-        this.gameBoard = gameBoard
-        this.currentPlayer = 'X';
+        this.gameBoard = gameBoard;
         this.gameOver = false;
         this.statusEl = document.getElementById('status');
+        this.revealedCount = 0;
+        this.firstClick = true;
+        if(this.statusEl)
+        {
+            this.statusEl.textContent = 'Click a cell to begin!';
+        }
     }
 
-    makeMove(index) {
-        if (this.gameOver || this.gameBoard.board[index]) return;
+    revealCell(row, col) {
+        if(this.gameOver)
+        {
+            return;
+        }
+        
+        const cell = this.gameBoard.board[row][col];
+        if(!cell || cell.revealed || cell.flagged)
+        {
+            return;
+        }
 
-        this.gameBoard.updateCell(index, this.currentPlayer);
+        if(this.firstClick) {
+            this.gameBoard.placeBombs(row, col);
+            this.firstClick = false;
+        }
+
+        cell.revealed=true;
+        this.revealedCount++;
+
+        if(cell.bomb) {
+            this.gameOver = true;
+            if(this.statusEl){
+                this.statusEl.textContent = 'Boom! You hit a mine';
+                this.revealAllBombs();
+                this.gameBoard.renderBoard('game-container');
+                return;
+            }
+        }
+
+        if(cell.count === 0) {
+            this.revealEmptyNeighbours(row, col);
+        }
 
         this.gameBoard.renderBoard('game-container');
 
-        if (this.checkWin()) {
+        if(this.checkWin()) {
             this.gameOver = true;
-            if (this.statusEl) this.statusEl.textContent = `Player ${this.currentPlayer} wins`;
-            return;
+            if(this.statusEl)
+            {
+                this.statusEl.textContent = "You won!";
+            }
         }
-
-        if (this.checkDraw()) {
-            this.gameOver = true;
-            if (this.statusEl) this.statusEl.textContent = "It's a draw";
-            return;
-        }
-
-        this.currentPlayer = this.currentPlayer === "X" ? "O" : "X";
-        if (this.statusEl) this.statusEl.textContent = `Player ${this.currentPlayer}'s turn`;
     }
 
+    revealEmptyNeighbours(row, col) {
+        const grid = [
+            [-1, -1], [-1, 0], [-1, 1],
+            [0, -1],  [0, 1],
+            [1, -1],  [1, 0],  [1, 1],
+        ];
 
-    checkWin = () => {
+        for(const [gridrows, gridcols] of grid) {
+            const neighborRow = row + gridrows;
+            const neighborCol = col + gridcols;
 
-        const brd = this.gameBoard.board;
-        const winCombos = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-            [0, 4, 8], [2, 4, 6], // Diagonals
-        ]
+            if(!this.gameBoard.inBounds(neighborRow, neighborCol))
+            {
+                continue;
+            }
+            const neighbor = this.gameBoard.board[neighborRow][neighborCol];
+            
+            if(neighbor.revealed || neighbor.flagged)
+            {
+                continue;
+            }
 
-        return winCombos.some(([a, b, c]) => {
-            return brd[a] &&
-                brd[a] === brd[b] &&
-                brd[a] === brd[c];
-        });
+            neighbor.revealed = true;
+            this.revealedCount++;
+
+            if (neighbor.count === 0 && !neighbor.bomb) {
+                this.revealEmptyNeighbors(neighborRow, neighborCol);
+            }
+        }
     }
 
-    checkDraw() {
-        return this.gameBoard.board.every(cell => cell);
+    toggleFlag(row, col) {
+        if(this.gameOver)
+        {
+            return;
+        }
+        const cell = this.gameBoard.board[row][col];
+        if(!cell || cell.revealed)
+        {
+            return;
+        }
+        cell.flagged = !cell.flagged;
+
+        this.gameBoard.renderBoard('game-container');
+    }
+
+    revealAllBombs() {
+        for( let row = 0; row < this.gameBoard.rows; row++) {
+            for(let col = 0; col < this.gameBoard.cols; col++) {
+                const cell = this.gameBoard.board[row][col];
+                if(cell.bomb)
+                {
+                    cell.revealed = true;
+                }
+            }
+        }
+    }
+
+    checkWin() {
+        const totalCells = this.gameBoard.rows * this.gameBoard.cols;
+
+        return this.revealedCount === (totalCells - this.gameBoard.bombs);
     }
 
     reset() {
-        this.currentPlayer = 'X';
         this.gameOver = false;
+        this.revealedCount = 0;
+        this.firstClick = true;
+        if(this.statusEl)
+        {
+            this.statusEl.textContent = 'Click a cell to begin!';
+        }
         this.gameBoard.reset();
+        this.gameBoard.renderBoard('game-container');
     }
 }
 
