@@ -6,6 +6,7 @@ class GameEngine {
     constructor(containerId) {
         this.containerId = containerId;
 
+        // Create everything
         this.gameBoard = new GameBoard(9, 9, 10);
         this.gameLogic = new GameLogic(this.gameBoard);
         this.userInput = new UserInput(this.gameBoard, this.gameLogic);
@@ -17,6 +18,7 @@ class GameEngine {
 
         this.userInput.attachEvents();
 
+        // Dont attach listeners each time messes up flag mech
         this.resetBtn?.addEventListener('click', () => {
             this.gameLogic.reset();
         });

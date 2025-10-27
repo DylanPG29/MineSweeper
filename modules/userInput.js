@@ -3,7 +3,7 @@ class UserInput {
         this.gameBoard = gameBoard;
         this.gameLogic = gameLogic;
     }
-
+    // Got this from google dont really understand but works
     attachEvents() {
         const container = document.getElementById('game-container');
         container.addEventListener('click', (e) => {
@@ -14,6 +14,7 @@ class UserInput {
             this.gameLogic.revealCell(row, col);
         });
 
+        
         container.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             const cell = e.target.closest('.cell');

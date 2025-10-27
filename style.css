@@ -42,6 +42,9 @@ body {
     margin: 15px;
 }
 
+/*
+    Make sure cells dont overlap 
+*/
 #game-container {
     padding: 15px;
     display: grid;
@@ -49,6 +52,9 @@ body {
     justify-content: center;
 }
 
+/*
+    Line up reset button and text
+*/ 
 .game-controls {
     text-align: center;
     margin-top: 15px;
@@ -61,7 +67,9 @@ body {
     margin-top: 30px;
     border: 5px solid black;
 }
-
+/*
+    Cell size 
+*/
 .cell {
     width: 50px;
     height: 50px;
@@ -74,6 +82,9 @@ body {
     cursor: pointer;
 }
 
+/*
+    Change colour of cell when revealed
+*/
 .cell.revealed {
     background-color: #ddd;
     cursor: default;
@@ -87,6 +98,9 @@ body {
     pointer-events: none;
 }
 
+/*
+    Diffrent colour for number up to 8 (max possible)
+*/
 .num-1 {
     color: blue;
 }

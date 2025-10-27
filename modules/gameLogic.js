@@ -4,6 +4,7 @@ class GameLogic {
         this.gameOver = false;
         this.statusEl = document.getElementById('status');
         this.revealedCount = 0;
+        // Only place bombs after first click
         this.firstClick = true;
         if(this.statusEl)
         {
@@ -23,6 +24,7 @@ class GameLogic {
             return;
         }
 
+        // Place bombs after first click
         if(this.firstClick) {
             this.gameBoard.placeBombs(row, col);
             this.firstClick = false;
@@ -41,6 +43,7 @@ class GameLogic {
             }
         }
 
+        // If no bombs nearby reveal all neighbouing cells
         if(cell.count === 0) {
             this.revealEmptyNeighbours(row, col);
         }
@@ -57,6 +60,8 @@ class GameLogic {
     }
 
     revealEmptyNeighbours(row, col) {
+        
+        // Each section around cell (same as in calculateNumbers)
         const grid = [
             [-1, -1], [-1, 0], [-1, 1],
             [0, -1],  [0, 1],
@@ -81,6 +86,7 @@ class GameLogic {
             neighbor.revealed = true;
             this.revealedCount++;
 
+            // Call function again if the neighboring cell also has a count of 0
             if (neighbor.count === 0 && !neighbor.bomb) {
                 this.revealEmptyNeighbours(neighborRow, neighborCol);
             }
@@ -108,12 +114,14 @@ class GameLogic {
                 const cell = this.gameBoard.board[row][col];
                 if(cell.bomb)
                 {
+                    // Set each cell with a bomb to revealed to reveal them
                     cell.revealed = true;
                 }
             }
         }
     }
 
+    // If cells revealed is equal to total cells minus the bombs cells you win
     checkWin() {
         const totalCells = this.gameBoard.rows * this.gameBoard.cols;
 
