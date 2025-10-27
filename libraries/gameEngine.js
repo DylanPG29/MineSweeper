@@ -19,7 +19,6 @@ class GameEngine {
 
         this.resetBtn?.addEventListener('click', () => {
             this.gameLogic.reset();
-            this.userInput.attachEvents();
         });
     }
 }

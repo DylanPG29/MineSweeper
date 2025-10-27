@@ -13,14 +13,22 @@
     <div class="body-container">
         <aside class="score-container">
             <h3>Scoreboard</h3>
-
+            <p>Games Played: <span id="games-played">0</span></p>
+            <p>Games Won: <span id="games-won">0</span></p>
+            <p>Games Lost: <span id="games-lost">0</span></p>
         </aside>
-        <div id="game-container">
+        <section class="game-section">
+            <div id="game-container">
 
-        </div>
-        <p id="status">Players X's turn</p>
-        <button id="reset">Reset Game</button>
-        <!--<article class="rules-container">
+            </div>
+            <div class="game-controls">
+                <p id="status">Click a cell to begin!</p>
+                <button id="reset">Reset Game</button>
+            </div>
+    
+        </section>
+
+        <article class="rules-container">
             <h2>Rules</h2>
             <h3>Objective</h3>
             <p>
@@ -34,7 +42,7 @@
             <h3>Winning</h3>
             <p>You've won the game when you've opened all squares that don't contain a mine. If you've opened all the empty squares but haven't flagged the mine squares remaining, they will be auto-flagged and you have won. Flagging is not required, it's only there to help you keep track of where you think the mines are. The real way to win is open all the non-mine squares.</p>
 
-        </article>-->
+        </article>
     </div>
 
     <div class="footer-container">

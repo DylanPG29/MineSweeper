@@ -82,7 +82,7 @@ class GameLogic {
             this.revealedCount++;
 
             if (neighbor.count === 0 && !neighbor.bomb) {
-                this.revealEmptyNeighbors(neighborRow, neighborCol);
+                this.revealEmptyNeighbours(neighborRow, neighborCol);
             }
         }
     }
